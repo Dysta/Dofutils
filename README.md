@@ -1,9 +1,13 @@
 # Dofutils
-Collection of useful things for build Dofus Retro bot/emulator
+Collection of useful things for build Dofus Retro bot/emulator. \
+Written in Python3
+
+## Installation
+Not available yet.
 
 ## Acknowledgement
-[Vincent Quatrevieux](https://github.com/vincent4vx) who made the original code \
-This repos is juste a Python translation from [ArakneUtils](https://github.com/Arakne/ArakneUtils)
+[Vincent Quatrevieux](https://github.com/vincent4vx) : the author of the original lib \
+[ArakneUtils](https://github.com/Arakne/ArakneUtils) : the original code
 
 ## Author
-[Dysta](https://github.com/dysta) (me)
+[Dysta](https://github.com/Dysta) (me)

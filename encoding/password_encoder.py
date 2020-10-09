@@ -5,6 +5,7 @@ class password_encoder:
     def __init__(self, key: str) -> None:
         """
         Construct a password_encoder object
+
         :param key: The key to use. Must be enough to encode the password
         """
         self._key = key
@@ -12,6 +13,7 @@ class password_encoder:
     def key(self) -> str:
         """
         Get the encoding key
+
         :return: the key
         :rtype: str
         """
@@ -20,6 +22,7 @@ class password_encoder:
     def decode(self, encoded: str) -> str:
         """
         decode the given encoded string using the key
+
         :param encoded: the encoded string
         :return: the decoded string in base64 format
         :raise Exception: when the encoded string is invalid or the key is too small
@@ -34,7 +37,7 @@ class password_encoder:
         decoded: str = ""
 
         for i in range(int(len(encoded) / 2)):
-            p: int = int(i / 2)
+            p: int = i // 2
             k: int = ord(self._key[i]) % 64
 
             # get two chars int value (divider and modulo)
@@ -61,6 +64,7 @@ class password_encoder:
     def encode(self, password: str) -> str:
         """
         Encode the given password using the key
+        
         :param password: the raw password
         :return: the encoded password
         :raise Exception: when the password is too long
@@ -73,15 +77,15 @@ class password_encoder:
 
         for i in range(len(password)):
             # password char and key
-            c: str = password[i]
-            k: str = self._key[i]
+            c: int = ord(password[i])
+            k: int = ord(self._key[i])
 
             # get the divider and modulo values
-            d: int = int(int(c) / 16)
-            r: int = int(c) % 16
+            d: int = c // 16
+            r: int = c % 16
 
             # encode into base64
-            encoded[i * 2] = Base64.chrMod(d + int(k))
-            encoded[i * 2 + 1] = Base64.chrMod(r + int(k))
+            encoded[i * 2] = Base64.chrMod(d + k)
+            encoded[i * 2 + 1] = Base64.chrMod(r + k)
 
         return encoded

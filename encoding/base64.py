@@ -10,13 +10,13 @@ class Base64:
 
         :param char: The char to convert
         :return: The int value, between 0 and 63 included
-        :raise Exception: when character is outside the charset or when parameter is not a single char
+        :raise ValueError: when character is outside the charset or when parameter is not a single char
         :rtype: int
         """
         if len(char) > 1:
-            raise Exception('Incorrect parameter: expected a single character')
+            raise ValueError('Expected a single character')
         if char[0] not in Base64._CHARSET:
-            raise Exception('Incorrect parameter: invalid char value')
+            raise ValueError('Invalid char value')
 
         if 'a' <= char <= 'z':
             return ord(char) - ord('a')
@@ -30,7 +30,7 @@ class Base64:
         if char == '-':
             return 62
 
-        return 63 # char is equal to '_'
+        return 63  # char is equal to '_'
 
 
     def chr(value: int) -> str:
@@ -39,11 +39,11 @@ class Base64:
 
         :param value: The value to convert
         :return: Encoded value
-        :raise Exception: when value is not in the charset
+        :raise ValueError: when value is not in the charset
         :rtype: str
         """
         if not value < len(Base64._CHARSET):
-            raise Exception('Incorrect parameter: invalid value')
+            raise ValueError('Invalid value, must be in the following charset : ', Base64._CHARSET)
 
         return Base64._CHARSET[value]
 
@@ -65,11 +65,11 @@ class Base64:
         :param value: value to encode
         :param length: then expected result length. Must be in range [1-6]
         :return: the decoded value
-        :raise Exception: when the encoded string is not in range [1-6]
+        :raise ValueError: when the encoded string is not in range [1-6]
         :rtype: str
         """
         if length < 1 or length > 6:
-            raise Exception('Incorrect parameter: l must be in range [1-6]')
+            raise ValueError('Parameter length must be in range [1-6]')
 
         v: int = value
         result: str = ""
@@ -86,11 +86,11 @@ class Base64:
 
         :param encoded: the encoded value
         :return: the decoded value
-        :raise Exception: when the encoded string is not in range [1-6]
+        :raise ValueError: when the encoded string is not in range [1-6]
         :rtype: int
         """
         if len(encoded) > 6:
-            raise Exception('Incorret parameter: parameter too long')
+            raise ValueError('Parameter too long')
 
         value: int = 0
 

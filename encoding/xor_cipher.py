@@ -1,6 +1,6 @@
-from urllib.parse import escape
+from urllib.parse import unquote
 
-class xor_cipher:
+class XorCipher:
     def __init__(self, key: str) -> None:
         self._key = key
 
@@ -20,10 +20,10 @@ class xor_cipher:
 
         :param value: Value to encrypt
         :param key_offset: Offset to use for the key
-        :return: Enrypted value
+        :return: Encrypted value
         :rtype: str
         """
-        evalue: str = xor_cipher._escape(value)
+        evalue: str = XorCipher._escape(value)
         encrypted: str = ""
 
         for i in range(len(evalue)):
@@ -34,7 +34,7 @@ class xor_cipher:
             if ord(e) < 16:
                 encrypted += '0'
             
-            encrypted += str(hex(ord(e)))
+            encrypted += hex(ord(e))
 
         return encrypted.upper()
 
@@ -44,11 +44,12 @@ class xor_cipher:
 
         :param value: The value to decrypt. Must be an hexadecimal string
         :param key_offset: Offset to use on the key. Must be the same used for encryption
+        :raise ValueError: When encrypted value is not odd
         :return: The decrypted value
         :rtype: str
         """
         if len(value) % 2 == 0:
-            raise Exception('Incorrect parameter: Invalid encrypted value')
+            raise ValueError('Invalid encrypted value. Value must be odd')
 
         decrypted: str = ""
 
@@ -70,11 +71,11 @@ class xor_cipher:
         """
         escaped: str = ""
 
-        for i in range(len(value)):
-            c: int = ord(value[i])
+        for i in value:
+            c: int = ord(i)
             if c < 32 or c > 127 or c == ord('%') or c == ord('+'):
-                escaped += escape(chr(c))
+                escaped += unquote(i)
             else:
-                escaped += chr(c)
+                escaped += i
 
         return escaped 

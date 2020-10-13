@@ -1,4 +1,4 @@
-class checksum:
+class CheckSum:
     def integer(value: str) -> int:
         """
         Compute the checksum as in integer
@@ -22,7 +22,7 @@ class checksum:
         :return: The hexadecimal checksum of the given value
         :rtype: str
         """
-        return hex(checksum.integer(value)).upper()
+        return hex(CheckSum.integer(value)).upper()
 
     def verify_int(input: str, expected: int) -> bool:
         """
@@ -33,7 +33,7 @@ class checksum:
         :return: true if checksum match, false otherwise
         :rtype: bool
         """
-        return checksum.integer(input) == expected
+        return CheckSum.integer(input) == expected
 
     def verify_str(input: str, expected: str) -> bool:
         """
@@ -44,4 +44,4 @@ class checksum:
         :return: true if checksum match, false otherwise
         :rtype: bool
         """
-        return checksum.integer(input) == int(expected, 16)
+        return CheckSum.integer(input) == int(expected, 16)

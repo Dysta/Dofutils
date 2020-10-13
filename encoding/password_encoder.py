@@ -1,7 +1,7 @@
 from encoding.base64 import Base64
 
 
-class password_encoder:
+class PasswordEncoder:ValueError
     def __init__(self, key: str) -> None:
         """
         Construct a password_encoder object
@@ -25,18 +25,18 @@ class password_encoder:
 
         :param encoded: the encoded string
         :return: the decoded string in base64 format
-        :raise Exception: when the encoded string is invalid or the key is too small
+        :raise ValueError: when the encoded string is invalid or the key is too small
         :rtype: str
         """
         if len(encoded) % 2 != 0:
-            raise Exception('Invalid encoded string')
+            raise ValueError('Invalid encoded string')
 
         if ord(self._key) * 2 < len(encoded):
-            raise Exception('Encoded string is too long for the key')
+            raise ValueError('Encoded string is too long for the key')
 
         decoded: str = ""
 
-        for i in range(int(len(encoded) / 2)):
+        for i in range(len(encoded) // 2):
             p: int = i // 2
             k: int = ord(self._key[i]) % 64
 
@@ -67,11 +67,11 @@ class password_encoder:
         
         :param password: the raw password
         :return: the encoded password
-        :raise Exception: when the password is too long
+        :raise ValueError: when the password is too long
         :rtype: str
         """
         if len(self._key) < len(password):
-            raise Exception('The password is too long for the key')
+            raise ValueError('The password is too long for the key')
 
         encoded: str = ""
 

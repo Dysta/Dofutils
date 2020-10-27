@@ -1,7 +1,7 @@
 from encoding.base64 import Base64
 
 
-class PasswordEncoder:ValueError
+class PasswordEncoder:
     def __init__(self, key: str) -> None:
         """
         Construct a password_encoder object

@@ -3,7 +3,9 @@ class Base64:
                       'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                       'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
                       'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_']
+    _MAX_INT: int = 2**31 - 1
 
+    @staticmethod
     def ord(char: str) -> int:
         """
         Convert the given single char value in base64
@@ -32,7 +34,7 @@ class Base64:
 
         return 63  # char is equal to '_'
 
-
+    @staticmethod
     def chr(value: int) -> str:
         """
         Get the base64 character from the given value
@@ -42,12 +44,12 @@ class Base64:
         :raise ValueError: when value is not in the charset
         :rtype: str
         """
-        if not value < len(Base64._CHARSET):
-            raise ValueError('Invalid value, must be in the following charset : ', Base64._CHARSET)
-
+        if not value < len(Base64._CHARSET) or value < 0:
+            raise ValueError('Invalid value, must be in the following range [0-63]')
         return Base64._CHARSET[value]
 
-    def chrMod(value: int) -> str:
+    @staticmethod
+    def chr_mod(value: int) -> str:
         """
         Get the base64 character from the given value after applying a modulo on it
         to ensure the call will not fail
@@ -58,6 +60,7 @@ class Base64:
         """
         return Base64._CHARSET[value % len(Base64._CHARSET)]
 
+    @staticmethod
     def encode(value: int, length: int) -> str:
         """
         Encode a int value to pseudo base64
@@ -74,12 +77,13 @@ class Base64:
         v: int = value
         result: str = ""
 
-        for i in range(length - 1, 0, -1):
+        for i in range(length, 0, -1):
             result = str(Base64._CHARSET[v & 63]) + result
             v >>= 6
 
         return result
 
+    @staticmethod
     def decode(encoded: str) -> int:
         """
         Decode pseudo base64 value to int
@@ -97,5 +101,19 @@ class Base64:
         for c in encoded:
             value <<= 6
             value += Base64.ord(c)
+            value = Base64._int_overflow(value)
 
         return value
+
+    @staticmethod
+    def _int_overflow(val: int) -> int:
+        """
+        from https://stackoverflow.com/questions/7770949/simulating-integer-overflow-in-python
+        Simulate a int overflow
+
+        :param val: the int to overflow
+        :return: a int with overflowed
+        """
+        if not -Base64._MAX_INT - 1 <= val <= Base64._MAX_INT:
+            val = (val + (Base64._MAX_INT + 1)) % (2 * (Base64._MAX_INT + 1)) - Base64._MAX_INT - 1
+        return val

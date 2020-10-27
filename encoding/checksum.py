@@ -1,4 +1,5 @@
 class CheckSum:
+    @staticmethod
     def integer(value: str) -> int:
         """
         Compute the checksum as in integer
@@ -13,10 +14,11 @@ class CheckSum:
 
         return csum % 16
 
+    @staticmethod
     def hexadecimal(value: str) -> str:
         """
         Compute the checksum as an hexadecimal string
-        The return value is a single heacedimal char string
+        The return value is a single hexadecimal char string
 
         :param value: The value to compute
         :return: The hexadecimal checksum of the given value
@@ -24,6 +26,7 @@ class CheckSum:
         """
         return hex(CheckSum.integer(value)).upper()
 
+    @staticmethod
     def verify_int(input: str, expected: int) -> bool:
         """
         Verify the checksum of the input
@@ -35,6 +38,7 @@ class CheckSum:
         """
         return CheckSum.integer(input) == expected
 
+    @staticmethod
     def verify_str(input: str, expected: str) -> bool:
         """
         Verify the checksum of the input value

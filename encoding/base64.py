@@ -112,7 +112,7 @@ class Base64:
         Simulate a int overflow
 
         :param val: the int to overflow
-        :return: a int with overflowed
+        :return: the overflowed int
         """
         if not -Base64._MAX_INT - 1 <= val <= Base64._MAX_INT:
             val = (val + (Base64._MAX_INT + 1)) % (2 * (Base64._MAX_INT + 1)) - Base64._MAX_INT - 1

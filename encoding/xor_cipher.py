@@ -1,5 +1,6 @@
 from urllib.parse import unquote
 
+
 class XorCipher:
     def __init__(self, key: str) -> None:
         self._key = key
@@ -34,7 +35,7 @@ class XorCipher:
             if ord(e) < 16:
                 encrypted += '0'
             
-            encrypted += hex(ord(e))
+            encrypted += hex(ord(e))[2:]
 
         return encrypted.upper()
 
@@ -48,19 +49,23 @@ class XorCipher:
         :return: The decrypted value
         :rtype: str
         """
-        if len(value) % 2 == 0:
+        if len(value) % 2 != 0:
             raise ValueError('Invalid encrypted value. Value must be odd')
 
-        decrypted: str = ""
+        decrypted: list = []
+        for _ in range(len(value) // 2):
+            decrypted.append("")
 
-        for i in range(1, len(value), 2):
-            k: int = ord(self._key[i // 2 + key_offset] % len(self._key))
+        for i in range(0, len(value), 2):
+            p: int = (i // 2 + key_offset) % len(self._key)
+            k: int = ord(self._key[p])
             c: int = int(value[i:i+2], 16)
 
             decrypted[i // 2] = chr(c ^ k)
         
-        return decrypted
-    
+        return "".join(decrypted)
+
+    @staticmethod
     def _escape(value: str) -> str:
         """
         Escape the given value using URLEncode

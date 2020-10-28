@@ -76,7 +76,6 @@ class Key:
         for i in range(0, len(input), 2):
             key[i // 2] = chr(int(input[i:i+2], 16))
 
-
         return Key(unquote_plus("".join(key)))
 
     @staticmethod

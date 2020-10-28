@@ -1,5 +1,5 @@
 from encoding.xor_cipher import XorCipher
-from urllib.parse import unquote
+from urllib.parse import urlencode, unquote_plus
 from secrets import token_urlsafe
 
 
@@ -7,6 +7,15 @@ class Key:
     def __init__(self, key: str) -> None:
         self._key: str = key
         self._cipher: XorCipher = None
+
+    def key(self) -> str:
+        """
+        Return the current key used
+
+        :return: The current key used
+        :rtype: str
+        """
+        return self._key
 
     def cipher(self) -> XorCipher:
         """
@@ -25,20 +34,29 @@ class Key:
         """
         Encode the key to hexadecimal string
 
-        :return:  The encoded key
+        :return: The encoded key
         :rtype: str
         """
-        raw: str = unquote(self._key)
+        raw: str = urlencode({'': self._key})[1:]
         encrypted: str = ""
 
         for c in raw:
             if ord(c) < 16:
-                encrypted += ord('0')
+                encrypted += '0'
 
-            encrypted += hex(ord(c))
+            encrypted += hex(ord(c))[2:]
 
         return encrypted
 
+    def __len__(self) -> int:
+        """
+        Return the len of the current key used
+        :return: the len of the key
+        :rtype: int
+        """
+        return len(self._key)
+
+    @staticmethod
     def parse(input: str) -> 'Key':
         """
         Parse a hexadecimal key string
@@ -51,13 +69,17 @@ class Key:
         if len(input) % 2 != 0:
             raise ValueError('Invalid key. Length of key must be even')
 
-        key: str = ""
+        key: list = []
+        for _ in range(len(input) // 2):
+            key.append("")
 
         for i in range(0, len(input), 2):
             key[i // 2] = chr(int(input[i:i+2], 16))
 
-        return Key(unquote(key))
 
+        return Key(unquote_plus("".join(key)))
+
+    @staticmethod
     def generate(size: int = 128) -> 'Key':
         """
         Generate a new random key
@@ -66,4 +88,4 @@ class Key:
         :return: The generated key
         :rtype: Key
         """
-        return Key(token_urlsafe(size))
+        return Key(token_urlsafe(size)[:size])

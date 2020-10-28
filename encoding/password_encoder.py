@@ -31,14 +31,16 @@ class PasswordEncoder:
         if len(encoded) % 2 != 0:
             raise ValueError('Invalid encoded string')
 
-        if ord(self._key) * 2 < len(encoded):
+        if len(self._key) * 2 < len(encoded):
             raise ValueError('Encoded string is too long for the key')
 
-        decoded: str = ""
+        decoded: list = []
+        for _ in range(len(encoded) // 2):
+            decoded.append("")
 
-        for i in range(len(encoded) // 2):
+        for i in range(0, len(encoded), 2):
             p: int = i // 2
-            k: int = ord(self._key[i]) % 64
+            k: int = ord(self._key[p]) % 64
 
             # get two chars int value (divider and modulo)
             d: int = Base64.ord(encoded[i])
@@ -55,11 +57,11 @@ class PasswordEncoder:
                 r += 64
 
             # retrieve the original value
-            v: int = d * 46 + r
+            v: int = d * 16 + r
 
-            decoded[i] = chr(v)
+            decoded[p] = chr(v)
 
-        return decoded
+        return "".join(decoded)
 
     def encode(self, password: str) -> str:
         """
@@ -73,7 +75,9 @@ class PasswordEncoder:
         if len(self._key) < len(password):
             raise ValueError('The password is too long for the key')
 
-        encoded: str = ""
+        encoded: list = []
+        for _ in range(len(password) * 2):
+            encoded.append("")
 
         for i in range(len(password)):
             # password char and key
@@ -85,7 +89,7 @@ class PasswordEncoder:
             r: int = c % 16
 
             # encode into base64
-            encoded[i * 2] = Base64.chrMod(d + k)
-            encoded[i * 2 + 1] = Base64.chrMod(r + k)
+            encoded[i * 2] = Base64.chr_mod(d + k)
+            encoded[i * 2 + 1] = Base64.chr_mod(r + k)
 
-        return encoded
+        return "".join(encoded)

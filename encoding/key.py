@@ -69,9 +69,7 @@ class Key:
         if len(input) % 2 != 0:
             raise ValueError('Invalid key. Length of key must be even')
 
-        key: list = []
-        for _ in range(len(input) // 2):
-            key.append("")
+        key: list = [None for _ in range(len(input) // 2)]
 
         for i in range(0, len(input), 2):
             key[i // 2] = chr(int(input[i:i+2], 16))

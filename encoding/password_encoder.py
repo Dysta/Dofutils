@@ -34,9 +34,7 @@ class PasswordEncoder:
         if len(self._key) * 2 < len(encoded):
             raise ValueError('Encoded string is too long for the key')
 
-        decoded: list = []
-        for _ in range(len(encoded) // 2):
-            decoded.append("")
+        decoded: list = [None for _ in range(len(encoded) // 2)]
 
         for i in range(0, len(encoded), 2):
             p: int = i // 2
@@ -75,9 +73,7 @@ class PasswordEncoder:
         if len(self._key) < len(password):
             raise ValueError('The password is too long for the key')
 
-        encoded: list = []
-        for _ in range(len(password) * 2):
-            encoded.append("")
+        encoded: list = [None for _ in range(len(password) * 2)]
 
         for i in range(len(password)):
             # password char and key

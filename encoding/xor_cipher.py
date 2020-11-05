@@ -52,9 +52,7 @@ class XorCipher:
         if len(value) % 2 != 0:
             raise ValueError('Invalid encrypted value. Value must be odd')
 
-        decrypted: list = []
-        for _ in range(len(value) // 2):
-            decrypted.append("")
+        decrypted: list = [None for _ in range(len(value) // 2)]
 
         for i in range(0, len(value), 2):
             p: int = (i // 2 + key_offset) % len(self._key)

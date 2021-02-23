@@ -3,7 +3,7 @@ Collection of useful things for build Dofus Retro bot/emulator. \
 Written in Python3
 
 ## Installation
-Not available yet.
+use `pip install Dofutils`
 
 ## Acknowledgement
 [Vincent Quatrevieux](https://github.com/vincent4vx) : the author of the original lib \

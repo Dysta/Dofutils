@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='Dofutils',
-    version='1.0.1',
+    version='0.0.1',
     packages=find_packages(exclude="tests"),
     url='https://github.com/Dysta/Dofutils',
     license='',

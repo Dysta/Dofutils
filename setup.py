@@ -4,8 +4,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name='Dofutils',
-    version='1.0.1',
+    name='dofutils',
+    version='0.0.1',
     packages=find_packages(exclude="tests"),
     url='https://github.com/Dysta/Dofutils',
     license='',
@@ -13,5 +13,5 @@ setup(
     author_email='',
     description='Collection of useful things for build Dofus Retro bot/emulator ',
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/markdown"
 )

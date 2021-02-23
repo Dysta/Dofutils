@@ -4,8 +4,8 @@
 name: Upload Dofutils Package
 
 on:
-  release:
-    types: [created]
+    push:
+      branches: [ release ]
 
 jobs:
   deploy:

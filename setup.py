@@ -13,5 +13,6 @@ setup(
     author_email='',
     description='Collection of useful things for build Dofus Retro bot/emulator ',
     long_description=long_description,
-    long_description_content_type="text/markdown"
+    long_description_content_type="text/markdown",
+    python_requires='>=3.8',
 )

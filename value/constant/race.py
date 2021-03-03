@@ -24,7 +24,7 @@ class Race(IntEnum):
         :return: The race object
         :rtype: Race
         """
-        if not Race.FECA.value <= race_id <= Race.PANDAWA.value:
+        if not race_id in list(map(int, Race)):
             raise ValueError(f"Incorrect parameter {race_id}, must be between 1 and 12")
 
         return Race(race_id)

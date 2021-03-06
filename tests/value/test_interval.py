@@ -61,3 +61,27 @@ class TestInterval(TestCase):
             Interval(5, 7),
             Interval(5, 9)
         )
+
+    def test_average(self):
+        self.assertEqual(12.5, Interval(10, 15).average())
+
+    def test_amplitude(self):
+        self.assertEqual(
+            5,
+            Interval(10, 15).amplitude()
+        )
+
+        self.assertEqual(
+            0,
+            Interval(10, 10).amplitude()
+        )
+
+        self.assertEqual(
+            20,
+            Interval(0, 20).amplitude()
+        )
+
+        self.assertEqual(
+            15,
+            Interval(-20, -5).amplitude()
+        )

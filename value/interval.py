@@ -58,3 +58,45 @@ class Interval:
             return False
 
         return self.min() == other.min() and self.max() == other.max()
+
+    @staticmethod
+    def of(a: int, b: int) -> 'Interval':
+        """
+        Create a interval with unordered boundary
+        The two boundary will be ordered to create a valid interval
+
+        :param a: the first boundary of the interval
+        :param b: the second boundary of the interval
+        :return: a new Interval instance
+        :rtype: Interval
+        """
+        if a > b:
+            return Interval(b, a)
+        return Interval(a, b)
+
+    def is_singleton(self) -> bool:
+        """
+        Check if the current interval is a singleton (i.e. min == max)
+
+        :return: true if the interval is a singleton, false otherwise
+        :rtype: bool
+        """
+        return self._min == self._max
+
+    def average(self) -> float:
+        """
+        Return the average value of the interval (i.e. min + max / 2)
+
+        :return: the average of the interval
+        :rtype: float
+        """
+        return (self._min + self._max) / 2
+
+    def amplitude(self) -> int:
+        """
+        Return the amplitude of the interval (i.e. max - min)
+
+        :return: the amplitude of the interval
+        :rtype: int
+        """
+        return self._max - self._min

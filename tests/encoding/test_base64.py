@@ -63,4 +63,3 @@ class TestBase64(TestCase):
         self.assertEqual(bytearray(), Base64.to_bytes(""))
         self.assertEqual(bytearray(b"\x02"), Base64.to_bytes("c"))
         self.assertEqual(bytearray([2, 31]), Base64.to_bytes("cF"))
-    

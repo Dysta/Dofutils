@@ -106,6 +106,22 @@ class Base64:
         return value
 
     @staticmethod
+    def to_bytes(encoded: str) -> bytearray:
+        """
+        Decode a Base 64 string to a byte array
+        Each byte will represents the {@link Base64#ord(char)} value of each characters
+
+        :param encoded: the encoded value
+        :return: the decoded byte array. The array size will be the same as the string size
+        :rtype: bytearray
+        """
+        b: bytearray = bytearray()
+        for c in encoded:
+            b.append(Base64.ord(c))
+
+        return b
+
+    @staticmethod
     def _int_overflow(val: int) -> int:
         """
         from https://stackoverflow.com/questions/7770949/simulating-integer-overflow-in-python

@@ -58,3 +58,9 @@ class TestBase64(TestCase):
 
         self.assertEqual("ai4qHh", Base64.encode(148965447, 6))
         self.assertEqual(148965447, Base64.decode("ai4qHh"))
+
+    def test_to_bytes(self):
+        self.assertEqual(bytearray(), Base64.to_bytes(""))
+        self.assertEqual(bytearray(b"\x02"), Base64.to_bytes("c"))
+        self.assertEqual(bytearray([2, 31]), Base64.to_bytes("cF"))
+    

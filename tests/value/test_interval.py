@@ -85,3 +85,7 @@ class TestInterval(TestCase):
             15,
             Interval(-20, -5).amplitude()
         )
+
+    def test_is_singleton(self):
+        self.assertTrue(Interval(5, 5).is_singleton())
+        self.assertFalse(Interval(5, 6).is_singleton())

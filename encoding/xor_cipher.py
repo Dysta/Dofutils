@@ -1,4 +1,4 @@
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
 
 class XorCipher:
@@ -61,7 +61,7 @@ class XorCipher:
 
             decrypted[i // 2] = chr(c ^ k)
         
-        return "".join(decrypted)
+        return unquote("".join(decrypted))
 
     @staticmethod
     def _escape(value: str) -> str:
@@ -76,8 +76,8 @@ class XorCipher:
 
         for i in value:
             c: int = ord(i)
-            if c < 32 or c > 127 or c == ord('%') or c == ord('+'):
-                escaped += unquote(i)
+            if c < 32 or c > 127 or i == '%' or i == '+':
+                escaped += quote(i)
             else:
                 escaped += i
 

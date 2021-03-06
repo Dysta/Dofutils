@@ -50,3 +50,6 @@ class TestPasswordEncoder(TestCase):
         self.assertEqual("", pe.decode(pe.encode("")))
         self.assertEqual("aaa", pe.decode(pe.encode("aaa")))
         self.assertEqual("Duis blandit id", pe.decode(pe.encode("Duis blandit id")))
+
+        encoder: PasswordEncoder = PasswordEncoder("a")
+        self.assertEqual("a", encoder.decode(encoder.encode("a")))

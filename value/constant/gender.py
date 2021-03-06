@@ -15,12 +15,7 @@ class Gender(IntEnum):
         :return: The Gender
         :rtype: int
         """
-        if len(value) > 1:
-            raise ValueError(f"Incorrect parameter {value}, must be 0 or 1")
-        if "0" not in value and "1" not in value:
+        if value not in list(map(int, Gender)):
             raise ValueError(f"Incorrect parameter {value}, must be 0 or 1")
 
-        if "0" in value:
-            return Gender.MALE
-
-        return Gender.FEMALE
+        return Gender(value)

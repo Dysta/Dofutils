@@ -8,6 +8,6 @@ class TestGender(TestCase):
         self.assertEqual(Gender.FEMALE, Gender.parse("1"))
 
     def test_parse_wrong_param(self):
-        self.assertRaises(TypeError, Gender.parse, value=5)
+        self.assertRaises(ValueError, Gender.parse, value=5)
         self.assertRaises(ValueError, Gender.parse, value="5")
         self.assertRaises(ValueError, Gender.parse, value="95")

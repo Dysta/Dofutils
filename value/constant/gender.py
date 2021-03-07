@@ -13,9 +13,10 @@ class Gender(IntEnum):
 
         :param value: The string to parse
         :return: The Gender
-        :rtype: int
+        :rtype: Gender
         """
-        if value not in list(map(int, Gender)):
+        val: int = int(value)
+        if val not in list(map(int, Gender)):
             raise ValueError(f"Incorrect parameter {value}, must be 0 or 1")
 
-        return Gender(value)
+        return Gender(val)

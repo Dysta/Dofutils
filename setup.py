@@ -10,9 +10,15 @@ setup(
     url='https://github.com/Dysta/Dofutils',
     license='',
     author='Dysta',
-    author_email='',
     description='Collection of useful things for build Dofus Retro bot/emulator ',
     long_description=long_description,
     long_description_content_type="text/markdown",
+    keywords='dofus, dofus retro, retro, bot, emulateur', 
     python_requires='>=3.8',
+    classifiers=[
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha'
+    ]
 )

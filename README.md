@@ -1,6 +1,6 @@
 # Dofutils
-Collection of useful things for build Dofus Retro bot/emulator. \
-Written in Python3. Require Python >= 3.8.
+Collection of useful things to build Dofus Retro bot/emulator. \
+Written in Python3. Require Python version >= 3.8.
 
 ## Installation
 use `pip install dofutils`

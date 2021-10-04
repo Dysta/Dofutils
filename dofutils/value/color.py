@@ -68,12 +68,14 @@ class Color:
         if self.__class__ != other.__class__:
             return False
 
-        return self.color1() == other.color1() and \
-               self.color2() == other.color2() and \
-               self.color3() == other.color3()
+        return (
+            self.color1() == other.color1()
+            and self.color2() == other.color2()
+            and self.color3() == other.color3()
+        )
 
     @staticmethod
-    def default() -> 'Color':
+    def default() -> "Color":
         """
         Return a object color with the default color
         -1 -1 -1
@@ -84,7 +86,7 @@ class Color:
         return Color(-1, -1, -1)
 
     @staticmethod
-    def random() -> 'Color':
+    def random() -> "Color":
         """
         Return a object color with random color
 
@@ -94,5 +96,5 @@ class Color:
         return Color(
             randint(0, Color._MAX_COLOR),
             randint(0, Color._MAX_COLOR),
-            randint(0, Color._MAX_COLOR)
+            randint(0, Color._MAX_COLOR),
         )

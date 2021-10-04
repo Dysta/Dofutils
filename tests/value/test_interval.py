@@ -1,5 +1,5 @@
 from unittest import TestCase
-from value.interval import *
+from dofutils.value import Interval
 
 
 class TestInterval(TestCase):
@@ -42,49 +42,25 @@ class TestInterval(TestCase):
         self.assertEqual(Interval(5, 7), inter.modify(2))
 
     def test_equals(self):
-        self.assertEqual(
-            Interval(5, 7),
-            Interval(5, 7)
-        )
+        self.assertEqual(Interval(5, 7), Interval(5, 7))
 
-        self.assertNotEqual(
-            Interval(5, 7),
-            Interval(4, 6)
-        )
+        self.assertNotEqual(Interval(5, 7), Interval(4, 6))
 
-        self.assertNotEqual(
-            Interval(4, 7),
-            Interval(5, 7)
-        )
+        self.assertNotEqual(Interval(4, 7), Interval(5, 7))
 
-        self.assertNotEqual(
-            Interval(5, 7),
-            Interval(5, 9)
-        )
+        self.assertNotEqual(Interval(5, 7), Interval(5, 9))
 
     def test_average(self):
         self.assertEqual(12.5, Interval(10, 15).average())
 
     def test_amplitude(self):
-        self.assertEqual(
-            5,
-            Interval(10, 15).amplitude()
-        )
+        self.assertEqual(5, Interval(10, 15).amplitude())
 
-        self.assertEqual(
-            0,
-            Interval(10, 10).amplitude()
-        )
+        self.assertEqual(0, Interval(10, 10).amplitude())
 
-        self.assertEqual(
-            20,
-            Interval(0, 20).amplitude()
-        )
+        self.assertEqual(20, Interval(0, 20).amplitude())
 
-        self.assertEqual(
-            15,
-            Interval(-20, -5).amplitude()
-        )
+        self.assertEqual(15, Interval(-20, -5).amplitude())
 
     def test_is_singleton(self):
         self.assertTrue(Interval(5, 5).is_singleton())

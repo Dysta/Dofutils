@@ -1,21 +1,26 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Dofutils Unit Test
+name: Dofutils CI Full
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - '**'
 
 jobs:
-  build:
+  linter:
+    runs-on: ${{ matrix.os }}
+    name: Lint Python
+    continue-on-error: true
 
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ['3.8', '3.9']
+        os: [ ubuntu-latest ]
 
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +28,67 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set up Poetry
+      uses: Gr1N/setup-poetry@v7
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pypoetry/virtualenvs
+        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
     - name: Install dependencies
-      run: if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: launch unit test
-      run: python -m unittest discover -v
+      run: poetry install
+    - name: Launch unit test
+      run: poetry run fmt
+  
+  type-checker:
+    runs-on: ${{ matrix.os }}
+    name: TypeChecker Python
+    continue-on-error: true
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9']
+        os: [ ubuntu-latest ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Set up Poetry
+      uses: Gr1N/setup-poetry@v7
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pypoetry/virtualenvs
+        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+    - name: Install dependencies
+      run: poetry install
+    - name: Launch unit test
+      run: poetry run tcheck
+
+  unit-tests:
+    runs-on: ${{ matrix.os }}
+    name: Unittest Python
+    continue-on-error: true
+
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9']
+        os: [ ubuntu-latest ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Set up Poetry
+      uses: Gr1N/setup-poetry@v7
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pypoetry/virtualenvs
+        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+    - name: Install dependencies
+      run: poetry install
+    - name: Launch unit test
+      run: poetry run tests

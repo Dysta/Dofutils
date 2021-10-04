@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "Dofutils"
+version = "0.0.4"
+description = "Collection of useful things to build Dofus Retro bot or emulator"
+keywords = ["dofus retro", "dofus", "retro", "bot", "emulateur"]
+authors = ["Dysta"]
+readme = "README.md"
+repository = "https://github.com/Dysta/Dofutils"
+exclude = ["tests", "tests.*"]
+classifiers = [
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 3 - Alpha'
+    ]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+black = "^21.9b0"
+mypy = "^0.910"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[tool.poetry.scripts]
+tests = "scripts:tests"
+fmt = "scripts:fmt"
+tcheck = "scripts:type_check"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

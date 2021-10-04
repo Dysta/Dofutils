@@ -1,4 +1,4 @@
-from encoding.base64 import Base64
+from .base64 import Base64
 
 
 class PasswordEncoder:
@@ -29,10 +29,10 @@ class PasswordEncoder:
         :rtype: str
         """
         if len(encoded) % 2 != 0:
-            raise ValueError('Invalid encoded string')
+            raise ValueError("Invalid encoded string")
 
         if len(self._key) * 2 < len(encoded):
-            raise ValueError('Encoded string is too long for the key')
+            raise ValueError("Encoded string is too long for the key")
 
         decoded: list = [None for _ in range(len(encoded) // 2)]
 
@@ -64,14 +64,14 @@ class PasswordEncoder:
     def encode(self, password: str) -> str:
         """
         Encode the given password using the key
-        
+
         :param password: the raw password
         :return: the encoded password
         :raise ValueError: when the password is too long
         :rtype: str
         """
         if len(self._key) < len(password):
-            raise ValueError('The password is too long for the key')
+            raise ValueError("The password is too long for the key")
 
         encoded: list = [None for _ in range(len(password) * 2)]
 

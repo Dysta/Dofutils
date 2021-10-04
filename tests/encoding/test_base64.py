@@ -1,30 +1,34 @@
 from unittest import TestCase
-from encoding.base64 import *
+from dofutils.encoding import Base64
 
 
 class TestBase64(TestCase):
     def test_ord_success(self):
-        charset: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+        charset: str = (
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+        )
         for i in range(len(charset)):
-            self.assertEqual(i, Base64.ord(charset[i]), f"Fail with numb {i} and char {charset[i]}")
+            self.assertEqual(
+                i, Base64.ord(charset[i]), f"Fail with numb {i} and char {charset[i]}"
+            )
 
     def test_ord_invalid_param(self):
         self.assertRaises(ValueError, Base64.ord, char="#")
         self.assertRaises(ValueError, Base64.ord, char="#a")
 
     def test_chr(self):
-        self.assertEqual('a', Base64.chr(0))
-        self.assertEqual('_', Base64.chr(63))
-        self.assertEqual('c', Base64.chr(2))
+        self.assertEqual("a", Base64.chr(0))
+        self.assertEqual("_", Base64.chr(63))
+        self.assertEqual("c", Base64.chr(2))
 
     def test_chr_invalid_param(self):
         self.assertRaises(ValueError, Base64.chr, value=-1)
         self.assertRaises(ValueError, Base64.chr, value=68)
 
     def test_chr_mod(self):
-        self.assertEqual('a', Base64.chr_mod(64))
-        self.assertEqual('r', Base64.chr_mod(145))
-        self.assertEqual('c', Base64.chr_mod(66))
+        self.assertEqual("a", Base64.chr_mod(64))
+        self.assertEqual("r", Base64.chr_mod(145))
+        self.assertEqual("c", Base64.chr_mod(66))
 
     def test_encode_single_char(self):
         self.assertEqual("cr", Base64.encode(145, 2))

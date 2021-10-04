@@ -1,13 +1,15 @@
-from encoding.xor_cipher import XorCipher
+from .xor_cipher import XorCipher
 from urllib.parse import urlencode, unquote_plus
 from secrets import token_urlsafe
+from typing import Optional
 
 
 class Key:
     def __init__(self, key: str) -> None:
         self._key: str = key
-        self._cipher: XorCipher = None
+        self._cipher: Optional[XorCipher] = None
 
+    @property
     def key(self) -> str:
         """
         Return the current key used
@@ -37,12 +39,12 @@ class Key:
         :return: The encoded key
         :rtype: str
         """
-        raw: str = urlencode({'': self._key})[1:]
+        raw: str = urlencode({"": self._key})[1:]
         encrypted: str = ""
 
         for c in raw:
             if ord(c) < 16:
-                encrypted += '0'
+                encrypted += "0"
 
             encrypted += hex(ord(c))[2:]
 
@@ -57,7 +59,7 @@ class Key:
         return len(self._key)
 
     @staticmethod
-    def parse(input: str) -> 'Key':
+    def parse(input: str) -> "Key":
         """
         Parse a hexadecimal key string
 
@@ -67,17 +69,17 @@ class Key:
         :rtype: Key
         """
         if len(input) % 2 != 0:
-            raise ValueError('Invalid key. Length of key must be even')
+            raise ValueError("Invalid key. Length of key must be even")
 
         key: list = [None for _ in range(len(input) // 2)]
 
         for i in range(0, len(input), 2):
-            key[i // 2] = chr(int(input[i:i+2], 16))
+            key[i // 2] = chr(int(input[i : i + 2], 16))
 
         return Key(unquote_plus("".join(key)))
 
     @staticmethod
-    def generate(size: int = 128) -> 'Key':
+    def generate(size: int = 128) -> "Key":
         """
         Generate a new random key
 

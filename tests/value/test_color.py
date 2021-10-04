@@ -1,5 +1,6 @@
 from unittest import TestCase
-from value.color import *
+from dofutils.value import Color
+
 
 class TestColor(TestCase):
     def test_getters(self):

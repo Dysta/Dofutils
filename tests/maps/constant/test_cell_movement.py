@@ -1,5 +1,5 @@
 from unittest import TestCase
-from maps.constant.cell_movement import *
+from dofutils.maps.constant import CellMovement
 
 
 class TestCellMovement(TestCase):

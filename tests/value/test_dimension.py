@@ -1,5 +1,6 @@
 from unittest import TestCase
-from value.dimension import *
+from dofutils.value import Dimension
+
 
 class TestDimension(TestCase):
     def test_dimension(self):

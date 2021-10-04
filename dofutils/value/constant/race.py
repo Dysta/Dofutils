@@ -16,7 +16,7 @@ class Race(IntEnum):
     PANDAWA = 12
 
     @staticmethod
-    def by_id(race_id: int) -> 'Race':
+    def by_id(race_id: int) -> "Race":
         """
         Get the character race by its id
 

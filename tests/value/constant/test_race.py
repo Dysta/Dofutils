@@ -1,5 +1,5 @@
 from unittest import TestCase
-from value.constant.race import *
+from dofutils.value.constant import Race
 
 
 class TestRace(TestCase):

@@ -1,13 +1,15 @@
 from .xor_cipher import XorCipher
 from urllib.parse import urlencode, unquote_plus
 from secrets import token_urlsafe
+from typing import Optional
 
 
 class Key:
     def __init__(self, key: str) -> None:
         self._key: str = key
-        self._cipher: XorCipher = None
+        self._cipher: Optional[XorCipher] = None
 
+    @property
     def key(self) -> str:
         """
         Return the current key used

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from encoding.checksum import *
+from dofutils.encoding import CheckSum
 
 
 class TestCheckSum(TestCase):

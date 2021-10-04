@@ -1,5 +1,5 @@
 from unittest import TestCase
-from maps.constant.direction import *
+from dofutils.maps.constant import Direction
 
 
 class TestDirection(TestCase):

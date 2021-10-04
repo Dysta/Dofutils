@@ -1,5 +1,5 @@
 from unittest import TestCase
-from encoding.key import *
+from dofutils.encoding import Key
 
 
 class TestKey(TestCase):

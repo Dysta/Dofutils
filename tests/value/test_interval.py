@@ -1,5 +1,5 @@
 from unittest import TestCase
-from value.interval import *
+from dofutils.value import Interval
 
 
 class TestInterval(TestCase):

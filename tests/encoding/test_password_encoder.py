@@ -1,5 +1,5 @@
 from unittest import TestCase
-from encoding.password_encoder import *
+from dofutils.encoding import PasswordEncoder
 
 
 class TestPasswordEncoder(TestCase):

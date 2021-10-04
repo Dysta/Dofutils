@@ -1,5 +1,5 @@
 from unittest import TestCase
-from value.constant.gender import *
+from dofutils.value.constant import Gender
 
 
 class TestGender(TestCase):

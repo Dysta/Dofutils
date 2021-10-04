@@ -1,5 +1,5 @@
 from unittest import TestCase
-from encoding.xor_cipher import *
+from dofutils.encoding import XorCipher
 
 
 class TestXorCipher(TestCase):

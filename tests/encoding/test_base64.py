@@ -1,5 +1,5 @@
 from unittest import TestCase
-from encoding.base64 import *
+from dofutils.encoding import Base64
 
 
 class TestBase64(TestCase):

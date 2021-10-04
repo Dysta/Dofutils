@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Dofutils"
-version = "0.1.0"
+version = "0.0.4"
 description = "Collection of useful things to build Dofus Retro bot or emulator"
 keywords = ["dofus retro", "dofus", "retro", "bot", "emulateur"]
 authors = ["Dysta"]

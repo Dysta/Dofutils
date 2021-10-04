@@ -1,4 +1,4 @@
-from encoding.base64 import Base64
+from .base64 import Base64
 
 
 class PasswordEncoder:

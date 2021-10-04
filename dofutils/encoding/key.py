@@ -1,4 +1,4 @@
-from encoding.xor_cipher import XorCipher
+from .xor_cipher import XorCipher
 from urllib.parse import urlencode, unquote_plus
 from secrets import token_urlsafe
 

@@ -4,7 +4,7 @@ from dofutils.encoding import XorCipher
 
 class TestXorCipher(TestCase):
     def test_key(self):
-        self.assertEqual("my key", XorCipher("my key").key())
+        self.assertEqual("my key", XorCipher("my key").key)
 
     def test_encrypt(self):
         cipher: XorCipher = XorCipher("my key")

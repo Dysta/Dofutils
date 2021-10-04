@@ -5,6 +5,7 @@ class XorCipher:
     def __init__(self, key: str) -> None:
         self._key = key
 
+    @property
     def key(self) -> str:
         """
         Return the key

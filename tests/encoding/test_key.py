@@ -18,7 +18,9 @@ class TestKey(TestCase):
 
     def test_parse(self):
         self.assertEqual("my key", Key.parse("6d792b6b6579").key())
-        self.assertEqual("%ù@à", Key.parse("253235254333254239253430254333254130").key())
+        self.assertEqual(
+            "%ù@à", Key.parse("253235254333254239253430254333254130").key()
+        )
 
         self.assertRaises(ValueError, Key.parse, input="invalid")
         self.assertRaises(ValueError, Key.parse, input="not hexa")

@@ -1,9 +1,71 @@
 class Base64:
-    _CHARSET: list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-                      'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-                      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-                      'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_']
-    _MAX_INT: int = 2**31 - 1
+    _CHARSET: list = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "-",
+        "_",
+    ]
+    _MAX_INT: int = 2 ** 31 - 1
 
     @staticmethod
     def ord(char: str) -> int:
@@ -16,20 +78,20 @@ class Base64:
         :rtype: int
         """
         if len(char) > 1:
-            raise ValueError('Expected a single character')
+            raise ValueError("Expected a single character")
         if char[0] not in Base64._CHARSET:
-            raise ValueError('Invalid char value')
+            raise ValueError("Invalid char value")
 
-        if 'a' <= char <= 'z':
-            return ord(char) - ord('a')
+        if "a" <= char <= "z":
+            return ord(char) - ord("a")
 
-        if 'A' <= char <= 'Z':
-            return ord(char) - ord('A') + 26
+        if "A" <= char <= "Z":
+            return ord(char) - ord("A") + 26
 
-        if '0' <= char <= '9':
-            return ord(char) - ord('0') + 52
+        if "0" <= char <= "9":
+            return ord(char) - ord("0") + 52
 
-        if char == '-':
+        if char == "-":
             return 62
 
         return 63  # char is equal to '_'
@@ -45,7 +107,7 @@ class Base64:
         :rtype: str
         """
         if not value < len(Base64._CHARSET) or value < 0:
-            raise ValueError('Invalid value, must be in the following range [0-63]')
+            raise ValueError("Invalid value, must be in the following range [0-63]")
         return Base64._CHARSET[value]
 
     @staticmethod
@@ -72,7 +134,7 @@ class Base64:
         :rtype: str
         """
         if length < 1 or length > 6:
-            raise ValueError('Parameter length must be in range [1-6]')
+            raise ValueError("Parameter length must be in range [1-6]")
 
         v: int = value
         result: str = ""
@@ -94,7 +156,7 @@ class Base64:
         :rtype: int
         """
         if len(encoded) > 6:
-            raise ValueError('Parameter too long')
+            raise ValueError("Parameter too long")
 
         value: int = 0
 
@@ -131,5 +193,9 @@ class Base64:
         :return: the overflowed int
         """
         if not -Base64._MAX_INT - 1 <= val <= Base64._MAX_INT:
-            val = (val + (Base64._MAX_INT + 1)) % (2 * (Base64._MAX_INT + 1)) - Base64._MAX_INT - 1
+            val = (
+                (val + (Base64._MAX_INT + 1)) % (2 * (Base64._MAX_INT + 1))
+                - Base64._MAX_INT
+                - 1
+            )
         return val

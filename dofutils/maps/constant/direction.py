@@ -26,10 +26,10 @@ class Direction(Enum):
 
         :return: The direction char value
         """
-        return chr(self._ordinal() + ord('a'))
+        return chr(self._ordinal() + ord("a"))
 
     @staticmethod
-    def by_char(c: str) -> 'Direction':
+    def by_char(c: str) -> "Direction":
         """
         Get the direction by its char value
 
@@ -37,9 +37,9 @@ class Direction(Enum):
         :return: The direction
         """
         dirs: list = [d for d in Direction]
-        return dirs[ord(c) - ord('a')]
+        return dirs[ord(c) - ord("a")]
 
-    def opposite(self) -> 'Direction':
+    def opposite(self) -> "Direction":
         """
         Get the opposite direction
 
@@ -49,7 +49,7 @@ class Direction(Enum):
         dirs: list = [d for d in Direction]
         return dirs[(self._ordinal() + 4) % 8]
 
-    def orthogonal(self) -> 'Direction':
+    def orthogonal(self) -> "Direction":
         """
         Get the orthogonal direction
 
@@ -93,4 +93,3 @@ class Direction(Enum):
                 restricted.append(d)
 
         return restricted
-

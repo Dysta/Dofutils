@@ -33,8 +33,8 @@ class XorCipher:
 
             e: str = chr(c ^ k)
             if ord(e) < 16:
-                encrypted += '0'
-            
+                encrypted += "0"
+
             encrypted += hex(ord(e))[2:]
 
         return encrypted.upper()
@@ -50,17 +50,17 @@ class XorCipher:
         :rtype: str
         """
         if len(value) % 2 != 0:
-            raise ValueError('Invalid encrypted value. Value must be odd')
+            raise ValueError("Invalid encrypted value. Value must be odd")
 
         decrypted: list = [None for _ in range(len(value) // 2)]
 
         for i in range(0, len(value), 2):
             p: int = (i // 2 + key_offset) % len(self._key)
             k: int = ord(self._key[p])
-            c: int = int(value[i:i+2], 16)
+            c: int = int(value[i : i + 2], 16)
 
             decrypted[i // 2] = chr(c ^ k)
-        
+
         return unquote("".join(decrypted))
 
     @staticmethod
@@ -76,9 +76,9 @@ class XorCipher:
 
         for i in value:
             c: int = ord(i)
-            if c < 32 or c > 127 or i == '%' or i == '+':
+            if c < 32 or c > 127 or i == "%" or i == "+":
                 escaped += quote(i)
             else:
                 escaped += i
 
-        return escaped 
+        return escaped

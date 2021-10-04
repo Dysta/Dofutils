@@ -4,12 +4,12 @@ from maps.constant.direction import *
 
 class TestDirection(TestCase):
     def test_to_char(self):
-        self.assertEqual('e', Direction.WEST.to_char())
-        self.assertEqual('a', Direction.EAST.to_char())
+        self.assertEqual("e", Direction.WEST.to_char())
+        self.assertEqual("a", Direction.EAST.to_char())
 
     def test_by_char(self):
-        self.assertEqual(Direction.WEST, Direction.by_char('e'))
-        self.assertEqual(Direction.SOUTH, Direction.by_char('c'))
+        self.assertEqual(Direction.WEST, Direction.by_char("e"))
+        self.assertEqual(Direction.SOUTH, Direction.by_char("c"))
 
     def test_opposite(self):
         self.assertEqual(Direction.WEST, Direction.EAST.opposite())
@@ -44,5 +44,10 @@ class TestDirection(TestCase):
         self.assertEqual(-14, Direction.NORTH_EAST.next_cell_increment(15))
 
     def test_restricted_directions(self):
-        dirs: list = [Direction.SOUTH_EAST, Direction.SOUTH_WEST, Direction.NORTH_WEST, Direction.NORTH_EAST]
+        dirs: list = [
+            Direction.SOUTH_EAST,
+            Direction.SOUTH_WEST,
+            Direction.NORTH_WEST,
+            Direction.NORTH_EAST,
+        ]
         self.assertListEqual(Direction.restricted_directions(), dirs)

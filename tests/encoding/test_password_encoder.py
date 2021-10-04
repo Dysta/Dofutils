@@ -4,7 +4,9 @@ from encoding.password_encoder import *
 
 class TestPasswordEncoder(TestCase):
     def test_key(self):
-        self.assertEqual("my super secure key", PasswordEncoder("my super secure key").key())
+        self.assertEqual(
+            "my super secure key", PasswordEncoder("my super secure key").key()
+        )
 
     def test_encode_simple(self):
         pe: PasswordEncoder = PasswordEncoder("my super secure key")
@@ -42,7 +44,11 @@ class TestPasswordEncoder(TestCase):
 
         self.assertRaises(ValueError, pe.decode, encoded="aaa")
         self.assertRaises(ValueError, pe.decode, encoded="not base64")
-        self.assertRaises(ValueError, pe.decode, encoded="a_string_too_long_for_the_given_key_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        self.assertRaises(
+            ValueError,
+            pe.decode,
+            encoded="a_string_too_long_for_the_given_key_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        )
 
     def test_encode_decode(self):
         pe: PasswordEncoder = PasswordEncoder("my super secure key")

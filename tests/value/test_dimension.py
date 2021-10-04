@@ -1,6 +1,7 @@
 from unittest import TestCase
 from value.dimension import *
 
+
 class TestDimension(TestCase):
     def test_dimension(self):
         dim: Dimension = Dimension(15, 17)

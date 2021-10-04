@@ -38,7 +38,7 @@ class Interval:
 
         return self._min <= value <= self._max
 
-    def modify(self, modifier: int) -> 'Interval':
+    def modify(self, modifier: int) -> "Interval":
         """
         Modify the end of the interval
         The returned interval will be [min, max + modifier]
@@ -60,7 +60,7 @@ class Interval:
         return self.min() == other.min() and self.max() == other.max()
 
     @staticmethod
-    def of(a: int, b: int) -> 'Interval':
+    def of(a: int, b: int) -> "Interval":
         """
         Create a interval with unordered boundary
         The two boundary will be ordered to create a valid interval

@@ -20,7 +20,7 @@ class CellMovement(IntEnum):
         return self.value > CellMovement.NOT_WALKABLE_INTERACTIVE.value
 
     @staticmethod
-    def by_value(value: int) -> 'CellMovement':
+    def by_value(value: int) -> "CellMovement":
         """
         Get a cell movement by its value. Value must be in range [0-7]
 
@@ -28,7 +28,11 @@ class CellMovement(IntEnum):
         :return: The movement object
         :raise ValueError: When value is not in range [0-7]
         """
-        if not CellMovement.NOT_WALKABLE.value <= value <= CellMovement.MOST_WALKABLE.value:
+        if (
+            not CellMovement.NOT_WALKABLE.value
+            <= value
+            <= CellMovement.MOST_WALKABLE.value
+        ):
             raise ValueError(f"Incorrect parameter {value}, must be in range [0-7]")
 
         return CellMovement(value)

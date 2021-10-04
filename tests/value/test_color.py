@@ -1,6 +1,7 @@
 from unittest import TestCase
 from value.color import *
 
+
 class TestColor(TestCase):
     def test_getters(self):
         c: Color = Color(123, 456, 789)

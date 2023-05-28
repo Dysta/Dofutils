@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 from enum import IntEnum
 
 
 class Race(IntEnum):
+    NO_CLASS = 0
     FECA = 1
     OSAMODAS = 2
     ENUTROF = 3
@@ -16,7 +19,7 @@ class Race(IntEnum):
     PANDAWA = 12
 
     @staticmethod
-    def by_id(race_id: int) -> "Race":
+    def by_id(race_id: int) -> Race:
         """
         Get the character race by its id
 

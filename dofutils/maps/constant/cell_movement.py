@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import IntEnum
 
 
@@ -20,7 +22,7 @@ class CellMovement(IntEnum):
         return self.value > CellMovement.NOT_WALKABLE_INTERACTIVE.value
 
     @staticmethod
-    def by_value(value: int) -> "CellMovement":
+    def by_value(value: int) -> CellMovement:
         """
         Get a cell movement by its value. Value must be in range [0-7]
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import IntEnum
 from typing import Literal
 
@@ -7,7 +9,7 @@ class Gender(IntEnum):
     FEMALE = 1
 
     @staticmethod
-    def parse(value: Literal["0", "1"]) -> "Gender":
+    def parse(value: Literal["0", "1"]) -> Gender:
         """
         Get gender from string
 

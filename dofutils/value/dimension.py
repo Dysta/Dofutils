@@ -3,6 +3,7 @@ class Dimension:
         self._width = width
         self._height = height
 
+    @property
     def width(self) -> int:
         """
         Return the width of the dimension
@@ -12,6 +13,7 @@ class Dimension:
         """
         return self._width
 
+    @property
     def height(self) -> int:
         """
         Return the height of the dimension
@@ -25,4 +27,4 @@ class Dimension:
         if other.__class__ != self.__class__:
             return False
 
-        return self.width() == other.width() and self.height() == other.height()
+        return self.width == other.width and self.height == other.height

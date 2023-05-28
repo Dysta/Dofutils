@@ -9,6 +9,7 @@ class Color:
         self._color2 = color2
         self._color3 = color3
 
+    @property
     def color1(self) -> int:
         """
         Return the first color
@@ -18,6 +19,7 @@ class Color:
         """
         return self._color1
 
+    @property
     def color2(self) -> int:
         """
         Return the second color
@@ -27,6 +29,7 @@ class Color:
         """
         return self._color2
 
+    @property
     def color3(self) -> int:
         """
         Return the third color
@@ -43,7 +46,7 @@ class Color:
         :return: a list containing the color
         :rtype: list
         """
-        return [self.color1(), self.color2(), self.color3()]
+        return [self.color1, self.color2, self.color3]
 
     def hex_colors(self) -> list:
         """
@@ -52,7 +55,7 @@ class Color:
         :return: a list containing the color
         :rtype: list
         """
-        return [hex(self.color1())[2:], hex(self.color2())[2:], hex(self.color3())[2:]]
+        return [hex(self.color1)[2:], hex(self.color2)[2:], hex(self.color3)[2:]]
 
     def hex_color_str(self, separator: str) -> str:
         """
@@ -69,9 +72,9 @@ class Color:
             return False
 
         return (
-            self.color1() == other.color1()
-            and self.color2() == other.color2()
-            and self.color3() == other.color3()
+            self.color1 == other.color1
+            and self.color2 == other.color2
+            and self.color3 == other.color3
         )
 
     @staticmethod

@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from dofutils.encoding import Base64
 
 

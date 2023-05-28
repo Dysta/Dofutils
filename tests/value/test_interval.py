@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from dofutils.value import Interval
 
 
@@ -9,12 +10,12 @@ class TestInterval(TestCase):
     def test_min(self):
         inter: Interval = Interval(2, 5)
 
-        self.assertEqual(2, inter.min())
+        self.assertEqual(2, inter.min)
 
     def test_max(self):
         inter: Interval = Interval(2, 5)
 
-        self.assertEqual(5, inter.max())
+        self.assertEqual(5, inter.max)
 
     def test_contains(self):
         inter: Interval = Interval(5, 15)

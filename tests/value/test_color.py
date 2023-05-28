@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from dofutils.value import Color
 
 
@@ -6,9 +7,9 @@ class TestColor(TestCase):
     def test_getters(self):
         c: Color = Color(123, 456, 789)
 
-        self.assertEqual(123, c.color1())
-        self.assertEqual(456, c.color2())
-        self.assertEqual(789, c.color3())
+        self.assertEqual(123, c.color1)
+        self.assertEqual(456, c.color2)
+        self.assertEqual(789, c.color3)
 
     def test_colors(self):
         c: Color = Color(123, 456, 789)
@@ -28,9 +29,9 @@ class TestColor(TestCase):
     def test_default(self):
         c: Color = Color.default()
 
-        self.assertEqual(-1, c.color1())
-        self.assertEqual(-1, c.color2())
-        self.assertEqual(-1, c.color3())
+        self.assertEqual(-1, c.color1)
+        self.assertEqual(-1, c.color2)
+        self.assertEqual(-1, c.color3)
 
     def test_equals(self):
         c1: Color = Color(123, 456, 789)
@@ -50,6 +51,6 @@ class TestColor(TestCase):
         for _ in range(5000):
             c = Color.random()
 
-            self.assertNotEqual(-1, c.color1())
-            self.assertNotEqual(-1, c.color2())
-            self.assertNotEqual(-1, c.color3())
+            self.assertNotEqual(-1, c.color1)
+            self.assertNotEqual(-1, c.color2)
+            self.assertNotEqual(-1, c.color3)

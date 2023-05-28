@@ -36,8 +36,8 @@ jobs:
         key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
     - name: Install dependencies
       run: poetry install
-    - name: Launch unit test
-      run: poetry run fmt
+    - name: Launch linter
+      run: poetry run task lint
   
   type-checker:
     runs-on: ${{ matrix.os }}
@@ -63,8 +63,8 @@ jobs:
         key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
     - name: Install dependencies
       run: poetry install
-    - name: Launch unit test
-      run: poetry run tcheck
+    - name: Launch type checker
+      run: poetry run task check
 
   unit-tests:
     runs-on: ${{ matrix.os }}
@@ -91,4 +91,4 @@ jobs:
     - name: Install dependencies
       run: poetry install
     - name: Launch unit test
-      run: poetry run tests
+      run: poetry run task test

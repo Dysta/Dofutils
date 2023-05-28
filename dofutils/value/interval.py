@@ -6,6 +6,7 @@ class Interval:
         self._min = min
         self._max = max
 
+    @property
     def min(self) -> int:
         """
         Return the current min of the interval
@@ -15,6 +16,7 @@ class Interval:
         """
         return self._min
 
+    @property
     def max(self) -> int:
         """
         Return the current max of the interval
@@ -57,7 +59,7 @@ class Interval:
         if self.__class__ != other.__class__:
             return False
 
-        return self.min() == other.min() and self.max() == other.max()
+        return self.min == other.min and self.max == other.max
 
     @staticmethod
     def of(a: int, b: int) -> "Interval":

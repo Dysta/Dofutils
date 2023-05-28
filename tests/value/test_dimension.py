@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from dofutils.value import Dimension
 
 
@@ -6,8 +7,8 @@ class TestDimension(TestCase):
     def test_dimension(self):
         dim: Dimension = Dimension(15, 17)
 
-        self.assertEqual(15, dim.width())
-        self.assertEqual(17, dim.height())
+        self.assertEqual(15, dim.width)
+        self.assertEqual(17, dim.height)
 
     def test_equals(self):
         dim: Dimension = Dimension(15, 17)

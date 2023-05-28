@@ -1,11 +1,12 @@
 from unittest import TestCase
+
 from dofutils.encoding import PasswordEncoder
 
 
 class TestPasswordEncoder(TestCase):
     def test_key(self):
         self.assertEqual(
-            "my super secure key", PasswordEncoder("my super secure key").key()
+            "my super secure key", PasswordEncoder("my super secure key").key
         )
 
     def test_encode_simple(self):

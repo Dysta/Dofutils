@@ -10,6 +10,7 @@ class PasswordEncoder:
         """
         self._key = key
 
+    @property
     def key(self) -> str:
         """
         Get the encoding key

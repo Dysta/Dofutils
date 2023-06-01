@@ -15,11 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
     - name: Set up Poetry
-      uses: Gr1N/setup-poetry@v7
+      uses: Gr1N/setup-poetry@v8
     - name: Install dependencies
       run: poetry install
     - name: Build

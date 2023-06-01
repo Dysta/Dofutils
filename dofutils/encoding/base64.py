@@ -6,7 +6,6 @@ class Base64:
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "_",
     ]
     # fmt: on
-    _MAX_INT: int = 2**31 - 1
 
     @staticmethod
     def ord(char: str) -> int:
@@ -14,8 +13,9 @@ class Base64:
         Convert the given single char value in base64
 
         :param char: The char to convert
+        :raises ValueError: When parameter char isn't a single character
+        :raises ValueError: When parameter char is outside the charset
         :return: The int value, between 0 and 63 included
-        :raise ValueError: when character is outside the charset or when parameter is not a single char
         :rtype: int
         """
         if len(char) > 1:
@@ -43,8 +43,8 @@ class Base64:
         Get the base64 character from the given value
 
         :param value: The value to convert
-        :return: Encoded value
         :raise ValueError: when value is not in the charset
+        :return: Encoded value
         :rtype: str
         """
         if not value < len(Base64._CHARSET) or value < 0:
@@ -70,8 +70,8 @@ class Base64:
 
         :param value: value to encode
         :param length: then expected result length. Must be in range [1-6]
-        :return: the decoded value
         :raise ValueError: when the encoded string is not in range [1-6]
+        :return: the decoded value
         :rtype: str
         """
         if length < 1 or length > 6:
@@ -99,12 +99,26 @@ class Base64:
         if len(encoded) > 6:
             raise ValueError("Parameter too long")
 
+        def overflow(val: int) -> int:
+            """
+            from https://stackoverflow.com/questions/7770949/simulating-integer-overflow-in-python
+            Simulate a int overflow
+
+            :param val: the int to overflow
+            :return: the overflowed int
+            """
+
+            MAX_INT: int = 2**31 - 1
+            if not -MAX_INT - 1 <= val <= MAX_INT:
+                val = (val + (MAX_INT + 1)) % (2 * (MAX_INT + 1)) - MAX_INT - 1
+            return val
+
         value: int = 0
 
         for c in encoded:
             value <<= 6
             value += Base64.ord(c)
-            value = Base64._int_overflow(value)
+            value = overflow(value)
 
         return value
 
@@ -123,20 +137,3 @@ class Base64:
             b.append(Base64.ord(c))
 
         return b
-
-    @staticmethod
-    def _int_overflow(val: int) -> int:
-        """
-        from https://stackoverflow.com/questions/7770949/simulating-integer-overflow-in-python
-        Simulate a int overflow
-
-        :param val: the int to overflow
-        :return: the overflowed int
-        """
-        if not -Base64._MAX_INT - 1 <= val <= Base64._MAX_INT:
-            val = (
-                (val + (Base64._MAX_INT + 1)) % (2 * (Base64._MAX_INT + 1))
-                - Base64._MAX_INT
-                - 1
-            )
-        return val

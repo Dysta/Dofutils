@@ -8,10 +8,7 @@ class CheckSum:
         :return: the checksum of the given value
         :rtype: str
         """
-        csum: int = 0
-        for s in value:
-            csum += ord(s) % 16
-
+        csum: int = sum([ord(s) % 16 for s in value])
         return csum % 16
 
     @staticmethod

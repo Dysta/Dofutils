@@ -7,8 +7,8 @@ class TestKey(TestCase):
     def test_cipher(self):
         key: Key = Key("my key")
 
-        self.assertEqual("my key", key.cipher().key)
-        self.assertEqual(key.cipher(), key.cipher())
+        self.assertEqual("my key", key.cipher.key)
+        self.assertEqual(key.cipher, key.cipher)
 
     def test_key(self):
         self.assertEqual("my key", Key("my key").key)

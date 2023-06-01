@@ -1,7 +1,10 @@
-from .xor_cipher import XorCipher
-from urllib.parse import urlencode, unquote_plus
+from __future__ import annotations
+
 from secrets import token_urlsafe
 from typing import Optional
+from urllib.parse import unquote_plus, urlencode
+
+from .xor_cipher import XorCipher
 
 
 class Key:
@@ -19,6 +22,7 @@ class Key:
         """
         return self._key
 
+    @property
     def cipher(self) -> XorCipher:
         """
         Get the cipher relative to this key.
@@ -59,7 +63,7 @@ class Key:
         return len(self._key)
 
     @staticmethod
-    def parse(input: str) -> "Key":
+    def parse(input: str) -> Key:
         """
         Parse a hexadecimal key string
 
@@ -79,7 +83,7 @@ class Key:
         return Key(unquote_plus("".join(key)))
 
     @staticmethod
-    def generate(size: int = 128) -> "Key":
+    def generate(size: int = 128) -> Key:
         """
         Generate a new random key
 

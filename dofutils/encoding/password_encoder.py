@@ -25,8 +25,8 @@ class PasswordEncoder:
         decode the given encoded string using the key
 
         :param encoded: the encoded string
-        :return: the decoded string in base64 format
         :raise ValueError: when the encoded string is invalid or the key is too small
+        :return: the decoded string in base64 format
         :rtype: str
         """
         if len(encoded) % 2 != 0:
@@ -67,8 +67,8 @@ class PasswordEncoder:
         Encode the given password using the key
 
         :param password: the raw password
-        :return: the encoded password
         :raise ValueError: when the password is too long
+        :return: the encoded password
         :rtype: str
         """
         if len(self._key) < len(password):

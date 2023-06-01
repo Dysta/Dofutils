@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from random import randint
 
 
@@ -78,7 +80,7 @@ class Color:
         )
 
     @staticmethod
-    def default() -> "Color":
+    def default() -> Color:
         """
         Return a object color with the default color
         -1 -1 -1
@@ -89,7 +91,7 @@ class Color:
         return Color(-1, -1, -1)
 
     @staticmethod
-    def random() -> "Color":
+    def random() -> Color:
         """
         Return a object color with random color
 

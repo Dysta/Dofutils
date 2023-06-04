@@ -9,7 +9,4 @@ sphinx:
 python:
   version: "3.8"
   install:
-    - method: pip
-      path: sphinx
-    - method: pip
-      path: sphinx-material
+    - requirements: docs/requirements.txt

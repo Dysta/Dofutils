@@ -6,10 +6,15 @@
 Welcome to Dofutils's documentation!
 ====================================
 
+.. currentmodule:: dofutils
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Primary Usage:
 
+   modules/encoding.rst
+   modules/value.rst
+   modules/maps.rst
 
 
 Indices and tables

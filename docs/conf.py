@@ -27,5 +27,12 @@ autosummary_generate = True
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "nature"
+html_theme = "sphinx_material"
+html_theme_options = {
+    "repo_url": "https://github.com/Dysta/Dofutils",
+    "repo_name": "Dofutils",
+    "nav_title": "Dofutils",
+    "color_primary": "teal",
+    "theme_color": "97a800",
+}
 html_static_path = ["_static"]

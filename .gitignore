@@ -5,3 +5,4 @@ build/
 dist/
 Dofutils.egg-info/
 poetry.lock
+doc/_build

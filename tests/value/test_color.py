@@ -14,12 +14,12 @@ class TestColor(TestCase):
     def test_colors(self):
         c: Color = Color(123, 456, 789)
 
-        self.assertListEqual([123, 456, 789], c.colors())
+        self.assertTupleEqual((123, 456, 789), c.colors())
 
     def test_hex_colors(self):
         c: Color = Color(123, 456, 789)
 
-        self.assertListEqual(["7b", "1c8", "315"], c.hex_colors())
+        self.assertTupleEqual(("7b", "1c8", "315"), c.hex_colors())
 
     def test_hex_color_str(self):
         c: Color = Color(123, 456, 789)

@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class CheckSum:
     @staticmethod
     def integer(value: str) -> int:

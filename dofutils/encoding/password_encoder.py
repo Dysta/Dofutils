@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from .base64 import Base64
 
 

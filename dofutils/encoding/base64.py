@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Base64:
     # fmt: off
     _CHARSET: list = [

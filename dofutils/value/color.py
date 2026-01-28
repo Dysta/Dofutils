@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from random import randint
+from typing import Tuple
 
 
 class Color:
@@ -41,25 +42,25 @@ class Color:
         """
         return self._color3
 
-    def colors(self) -> list:
+    def colors(self) -> Tuple[int, int, int]:
         """
-        Return a list containing the colors
+        Return a tuple containing the colors
 
-        :return: a list containing the color
-        :rtype: list
+        :return: a tuple containing the color
+        :rtype: tuple(int, int, int)
         """
-        return [self.color1, self.color2, self.color3]
+        return (self.color1, self.color2, self.color3)
 
-    def hex_colors(self) -> list:
+    def hex_colors(self) -> Tuple[str, str, str]:
         """
-        Return a list containing the colors in a hexadecimal format
+        Return a tuple containing the colors in a hexadecimal format
 
-        :return: a list containing the color
-        :rtype: list
+        :return: a tuple containing the color
+        :rtype: tuple(str, str, str)
         """
-        return [hex(self.color1)[2:], hex(self.color2)[2:], hex(self.color3)[2:]]
+        return (hex(self.color1)[2:], hex(self.color2)[2:], hex(self.color3)[2:])
 
-    def hex_color_str(self, separator: str) -> str:
+    def hex_color_str(self, separator: str = ";") -> str:
         """
         Return a str with the color joined by the separator
 
@@ -73,14 +74,10 @@ class Color:
         if self.__class__ != other.__class__:
             return False
 
-        return (
-            self.color1 == other.color1
-            and self.color2 == other.color2
-            and self.color3 == other.color3
-        )
+        return self.color1 == other.color1 and self.color2 == other.color2 and self.color3 == other.color3
 
-    @staticmethod
-    def default() -> Color:
+    @classmethod
+    def default(cls) -> Color:
         """
         Return a object color with the default color
         -1 -1 -1
@@ -88,17 +85,17 @@ class Color:
         :return: Return a default color
         :rtype: Color
         """
-        return Color(-1, -1, -1)
+        return cls(-1, -1, -1)
 
-    @staticmethod
-    def random() -> Color:
+    @classmethod
+    def random(cls) -> Color:
         """
         Return a object color with random color
 
         :return: Return a random color
         :rtype: Color
         """
-        return Color(
+        return cls(
             randint(0, Color._MAX_COLOR),
             randint(0, Color._MAX_COLOR),
             randint(0, Color._MAX_COLOR),

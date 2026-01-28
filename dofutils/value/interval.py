@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Interval:
     def __init__(self, min: int, max: int) -> None:
         if max < min:
@@ -61,8 +64,8 @@ class Interval:
 
         return self.min == other.min and self.max == other.max
 
-    @staticmethod
-    def of(a: int, b: int) -> "Interval":
+    @classmethod
+    def of(cls, a: int, b: int) -> Interval:
         """
         Create a interval with unordered boundary
         The two boundary will be ordered to create a valid interval
@@ -73,8 +76,8 @@ class Interval:
         :rtype: Interval
         """
         if a > b:
-            return Interval(b, a)
-        return Interval(a, b)
+            return cls(b, a)
+        return cls(a, b)
 
     def is_singleton(self) -> bool:
         """
@@ -85,6 +88,7 @@ class Interval:
         """
         return self._min == self._max
 
+    @property
     def average(self) -> float:
         """
         Return the average value of the interval (i.e. min + max / 2)
@@ -94,6 +98,7 @@ class Interval:
         """
         return (self._min + self._max) / 2
 
+    @property
     def amplitude(self) -> int:
         """
         Return the amplitude of the interval (i.e. max - min)

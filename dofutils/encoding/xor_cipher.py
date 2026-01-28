@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from urllib.parse import quote, unquote
 
 
@@ -77,7 +79,7 @@ class XorCipher:
 
         for i in value:
             c: int = ord(i)
-            if c < 32 or c > 127 or i == "%" or i == "+":
+            if c < 32 or c > 127 or i in ("=", "+"):
                 escaped += quote(i)
             else:
                 escaped += i

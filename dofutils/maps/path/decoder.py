@@ -90,10 +90,10 @@ class PathDecoder:
 
         start: int = 0 if include_start else 1
         for direction, steps in groupby(path.steps[start:], lambda s: s.direction):
-            steps = list(steps)
+            steps_l = list(steps)
 
             encoded.append(direction.to_char())
-            encoded.append(Base64.encode(steps[-1].cell.id, 2))
+            encoded.append(Base64.encode(steps_l[-1].cell.id, 2))
 
         return "".join(encoded)
 

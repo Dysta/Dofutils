@@ -12,11 +12,14 @@ permissions:
   contents: read
 
 jobs:
-  linter:
-    name: Lint Python
+  code-sanitize:
+    name: Code Sanitize
     runs-on: ubuntu-latest
-    env:
-      UV_PYTHON: "3.14"
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -26,34 +29,15 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Run ruff
+      - name: Check code sanitize
         run: |
           uv sync --all-groups
           uv run ruff check .
           uv run ruff format --check .
-
-  type-checker:
-    name: Type check Python
-    runs-on: ubuntu-latest
-    env:
-      UV_PYTHON: "3.14"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Install uv and set the Python version
-        uses: astral-sh/setup-uv@v9.0.0
-        with:
-          enable-cache: true
-
-      - name: Install dependencies
-        run: uv sync --all-groups
-
-      - name: Run mypy
-        run: uv run task check
+          uv run mypy . --exclude '^tests/'
 
   unit-tests:
-    name: Unit tests (Python ${{ matrix.python-version }})
+    name: Unit tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

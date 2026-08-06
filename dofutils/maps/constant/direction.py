@@ -4,8 +4,6 @@ from enum import Enum
 
 
 class Direction(Enum):
-    UNKNOWN = (-1, lambda width: -1)
-
     EAST = (0, lambda width: 1)
     SOUTH_EAST = (1, lambda width: width)
     SOUTH = (2, lambda width: 2 * width - 1)

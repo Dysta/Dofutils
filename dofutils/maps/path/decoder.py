@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import groupby
-from typing import List, Optional
 
 from dofutils.encoding import Base64
 from dofutils.maps import CoordinateCell, DofusMap
@@ -17,7 +16,7 @@ from .path_step import PathStep
 class PathDecoder:
     map: DofusMap
 
-    def next_cell_by_direction(self, start: CoordinateCell, dir: Direction) -> Optional[CoordinateCell]:
+    def next_cell_by_direction(self, start: CoordinateCell, dir: Direction) -> CoordinateCell | None:
         """
         Get the next cell on the map given a starting cell and a direction
 
@@ -35,7 +34,7 @@ class PathDecoder:
 
         return self.map.get_cell(next_id)
 
-    def decode(self, encoded: str, start: Optional[CoordinateCell] = None) -> Path:
+    def decode(self, encoded: str, start: CoordinateCell | None = None) -> Path:
         """
         Decode a path encoded string into a list of directions
 
@@ -83,7 +82,7 @@ class PathDecoder:
         :return: The encoded path string
         :rtype: str
         """
-        encoded: List[str] = []
+        encoded: list[str] = []
 
         if include_start:
             encoded.append(Direction.EAST.to_char())
@@ -99,7 +98,11 @@ class PathDecoder:
         return "".join(encoded)
 
     def _expand_rectilinear_move(
-        self, path: Path, start: CoordinateCell, target: CoordinateCell, direction: Direction
+        self,
+        path: Path,
+        start: CoordinateCell,
+        target: CoordinateCell,
+        direction: Direction,
     ) -> None:
         steps_limit: int = 2 * self.map.dimensions.width + 1
 

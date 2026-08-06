@@ -43,7 +43,7 @@ class Interval:
 
         return self._min <= value <= self._max
 
-    def modify(self, modifier: int) -> "Interval":
+    def modify(self, modifier: int) -> Interval:
         """
         Modify the end of the interval
         The returned interval will be [min, max + modifier]

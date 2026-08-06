@@ -10,7 +10,13 @@ from dofutils.maps.dofus_map import DofusMap
 class BattleFieldSight(CoordinateCell):
     sight_blocking: bool = True
 
-    def __init__(self, map: DofusMap, id: int, walkable: bool = False, sight_blocking: bool = False):
+    def __init__(
+        self,
+        map: DofusMap,
+        id: int,
+        walkable: bool = False,
+        sight_blocking: bool = False,
+    ):
         """
         Initialize a BattleFieldSight instance.
 

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from secrets import token_urlsafe
-from typing import Optional
 from urllib.parse import unquote_plus, urlencode
 
 from .xor_cipher import XorCipher
@@ -16,7 +15,7 @@ class Key:
         :type key: str
         """
         self._key: str = key
-        self._cipher: Optional[XorCipher] = None
+        self._cipher: XorCipher | None = None
 
     @property
     def key(self) -> str:

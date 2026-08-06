@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Callable, List, Union, overload
+from typing import overload
 
 from dofutils.maps.path import PathDecoder, PathStep
 
@@ -9,7 +10,7 @@ from dofutils.maps.path import PathDecoder, PathStep
 @dataclass
 class Path:
     decoder: PathDecoder
-    steps: List[PathStep] = field(default_factory=list)
+    steps: list[PathStep] = field(default_factory=list)
 
     def path_step(self, index: int) -> PathStep:
         """
@@ -110,9 +111,9 @@ class Path:
     @overload
     def __getitem__(self, index: int) -> PathStep: ...
     @overload
-    def __getitem__(self, index: slice) -> List[PathStep]: ...
+    def __getitem__(self, index: slice) -> list[PathStep]: ...
 
-    def __getitem__(self, index: Union[int, slice]) -> Union[PathStep, List[PathStep]]:
+    def __getitem__(self, index: int | slice) -> PathStep | list[PathStep]:
         """
         Get a path step or a slice of path steps at a given index
 
@@ -129,7 +130,7 @@ class Path:
         else:
             raise TypeError(f"Invalid argument type: {type(index)}")
 
-    def __add__(self, other: Union[Path, List[PathStep], PathStep]) -> Path:
+    def __add__(self, other: Path | list[PathStep] | PathStep) -> Path:
         """
         Concatenate two paths together
 

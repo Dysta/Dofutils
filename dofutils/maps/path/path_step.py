@@ -12,4 +12,4 @@ class PathStep:
     direction: Direction
 
     def __str__(self) -> str:
-        return "{%s, %s}" % (self.cell.id, self.direction.name)
+        return f"{{{self.cell.id}, {self.direction.name}}}"

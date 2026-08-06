@@ -1,4 +1,4 @@
-from .coordinate_cell import CoordinateCell
-from .dofus_map import DofusMap
+from .coordinate_cell import CoordinateCell as CoordinateCell
+from .dofus_map import DofusMap as DofusMap
 
-__all__ = ["DofusMap", "CoordinateCell"]
+__all__ = ["CoordinateCell", "DofusMap"]

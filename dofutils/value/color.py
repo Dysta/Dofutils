@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from random import randint
-from typing import Tuple
 
 
 class Color:
@@ -42,7 +41,7 @@ class Color:
         """
         return self._color3
 
-    def colors(self) -> Tuple[int, int, int]:
+    def colors(self) -> tuple[int, int, int]:
         """
         Return a tuple containing the colors
 
@@ -51,7 +50,7 @@ class Color:
         """
         return (self.color1, self.color2, self.color3)
 
-    def hex_colors(self) -> Tuple[str, str, str]:
+    def hex_colors(self) -> tuple[str, str, str]:
         """
         Return a tuple containing the colors in a hexadecimal format
 

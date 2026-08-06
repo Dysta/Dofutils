@@ -16,7 +16,13 @@ class CoordinateCell:
     walkable: bool = True
     sight_blocking: bool = False
 
-    def __init__(self, map: DofusMap, id: int, walkable: bool = True, sight_blocking: bool = False):
+    def __init__(
+        self,
+        map: DofusMap,
+        id: int,
+        walkable: bool = True,
+        sight_blocking: bool = False,
+    ):
         """
         Initialize a CoordinateCell instance.
 

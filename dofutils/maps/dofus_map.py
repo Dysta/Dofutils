@@ -2,9 +2,12 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from ..value import Dimension
-from .coordinate_cell import CoordinateCell
+
+if TYPE_CHECKING:
+    from .coordinate_cell import CoordinateCell
 
 
 @dataclass(frozen=True)

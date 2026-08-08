@@ -80,7 +80,7 @@ class CoordinateCell:
         :rtype: Direction
         """
         if self.x == target.x:
-            if self.y > target.y:
+            if target.y > self.y:
                 return Direction.SOUTH_WEST
             else:
                 return Direction.NORTH_EAST

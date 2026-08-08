@@ -27,10 +27,10 @@ class Race(IntEnum):
         :return: The race object
         :rtype: Race
         """
-        if not race_id in list(map(int, Race)):
+        try:
+            return Race(race_id)
+        except ValueError:
             raise ValueError(f"Incorrect parameter {race_id}, must be between 1 and 12")
-
-        return Race(race_id)
 
     def __eq__(self, value: object) -> bool:
         """

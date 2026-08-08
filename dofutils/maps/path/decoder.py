@@ -6,8 +6,8 @@ from itertools import groupby
 from dofutils.encoding import Base64
 from dofutils.maps import CoordinateCell, DofusMap
 from dofutils.maps.constant import Direction
-from dofutils.maps.path import Path
 
+from .path import Path
 from .path_exception import PathException
 from .path_step import PathStep
 
@@ -15,6 +15,11 @@ from .path_step import PathStep
 @dataclass(frozen=True)
 class PathDecoder:
     map: DofusMap
+
+    def pathfinder(self):
+        from .pathfinder import Pathfinder
+
+        return Pathfinder(self)
 
     def next_cell_by_direction(self, start: CoordinateCell, dir: Direction) -> CoordinateCell | None:
         """
@@ -51,9 +56,10 @@ class PathDecoder:
         directions: Path = Path(self)
 
         if start:
-            directions += PathStep(start, Direction.EAST)
+            directions.steps.append(PathStep(start, Direction.EAST))
 
-        for i, c in enumerate(encoded):
+        for i in range(0, len(encoded), 3):
+            c = encoded[i]
             if c < "a" or c > "h":
                 raise ValueError(f"Invalid direction character: {c}")
 
@@ -64,7 +70,7 @@ class PathDecoder:
                 raise ValueError(f"Invalid cell id: {cell}")
 
             if directions.empty():
-                directions += PathStep(self.map.get_cell(cell), Direction.EAST)
+                directions.steps.append(PathStep(self.map.get_cell(cell), Direction.EAST))
                 continue
 
             self._expand_rectilinear_move(directions, directions.target().cell, self.map.get_cell(cell), dire)
@@ -88,7 +94,7 @@ class PathDecoder:
             encoded.append(Direction.EAST.to_char())
             encoded.append(Base64.encode(path.first().cell.id, 2))
 
-        start: int = 0 if include_start else 1
+        start: int = 1 if include_start else 0
         for direction, steps in groupby(path.steps[start:], lambda s: s.direction):
             steps_l = list(steps)
 
@@ -110,9 +116,8 @@ class PathDecoder:
             if (c := self.next_cell_by_direction(start, direction)) is None:
                 raise PathException(f"Invalid cell number, cannot move from {start} to {target}")
 
-            path += PathStep(c, direction)
-
-        if steps_limit < 0:
-            raise PathException(f"Invalid path, too many steps from {start} to {target}")
-
-        steps_limit -= 1
+            start = c
+            path.steps.append(PathStep(start, direction))
+            steps_limit -= 1
+            if steps_limit < 0:
+                raise PathException(f"Invalid path, too many steps from {start} to {target}")

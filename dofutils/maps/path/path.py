@@ -2,9 +2,13 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import overload
+from itertools import takewhile
+from typing import TYPE_CHECKING, overload
 
-from dofutils.maps.path import PathDecoder, PathStep
+from .path_step import PathStep
+
+if TYPE_CHECKING:
+    from .decoder import PathDecoder
 
 
 @dataclass
@@ -71,15 +75,7 @@ class Path:
         :return: A new path with the kept steps
         :rtype: Path
         """
-        kept_steps: list[PathStep] = []
-
-        for step in self.steps:
-            if not predicate(step):
-                break
-
-            kept_steps.append(step)
-
-        return Path(self.decoder, kept_steps)
+        return Path(self.decoder, list(takewhile(predicate, self.steps)))
 
     def empty(self) -> bool:
         """

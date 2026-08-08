@@ -48,14 +48,8 @@ class PasswordEncoder:
             r: int = Base64.ord(encoded[i + 1])
 
             # remove key value
-            d -= k
-            r -= k
-
-            # if values are negative due to modulo, reverse the modulo
-            while d < 0:
-                d += 64
-            while r < 0:
-                r += 64
+            d = (d - k) % 64
+            r = (r - k) % 64
 
             # retrieve the original value
             v: int = d * 16 + r

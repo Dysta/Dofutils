@@ -18,10 +18,10 @@ class Gender(IntEnum):
         :rtype: Gender
         """
         val: int = int(value)
-        if val not in list(map(int, Gender)):
+        try:
+            return Gender(val)
+        except ValueError:
             raise ValueError(f"Incorrect parameter {value}, must be 0 or 1")
-
-        return Gender(val)
 
     def __eq__(self, value: object) -> bool:
         """

@@ -13,8 +13,7 @@ jobs:
     env:
       UV_PYTHON: "3.14"
       UV_PUBLISH_URL: https://test.pypi.org/legacy/
-      UV_PUBLISH_USERNAME: ${{ secrets.PYPI_TEST_USERNAME }}
-      UV_PUBLISH_PASSWORD: ${{ secrets.PYPI_TEST_PASSWORD }}
+      UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TEST_API_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7

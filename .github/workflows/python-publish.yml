@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       UV_PYTHON: "3.14"
-      UV_PUBLISH_USERNAME: ${{ secrets.PYPI_USERNAME }}
-      UV_PUBLISH_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7

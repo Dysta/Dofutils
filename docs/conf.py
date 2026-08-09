@@ -11,7 +11,7 @@ import sys
 project = "Dofutils"
 copyright = "2023, Dysta"
 author = "Dysta"
-release = "0.0.4"
+release = "0.0.5"
 
 sys.path.insert(0, os.path.abspath(".."))
 # -- General configuration ---------------------------------------------------

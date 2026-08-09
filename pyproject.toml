@@ -1,6 +1,6 @@
 [project]
 name = "Dofutils"
-version = "0.0.4"
+version = "0.0.5"
 description = "Collection of useful things to build Dofus Retro bot or emulator"
 readme = "README.md"
 requires-python = ">=3.11, <4.0"

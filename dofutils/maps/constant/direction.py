@@ -30,8 +30,8 @@ class Direction(Enum):
         """
         return chr(self._ordinal() + ord("a"))
 
-    @staticmethod
-    def by_char(c: str) -> Direction:
+    @classmethod
+    def by_char(cls, c: str) -> Direction:
         """
         Get the direction by its char value
 
@@ -91,3 +91,12 @@ class Direction(Enum):
         """
         restricted: list = [d for d in Direction if d.restricted()]
         return restricted
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Direction):
+            return False
+
+        return self._ordinal() == other._ordinal()
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)

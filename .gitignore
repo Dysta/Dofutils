@@ -1,8 +1,11 @@
 .idea/
 .mypy_cache/
+.ruff_cache/
 __pycache__/
 build/
 dist/
 Dofutils.egg-info/
 poetry.lock
+uv.lock
 doc/_build
+.devcontainer/devcontainer-lock.json

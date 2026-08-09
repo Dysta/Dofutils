@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from secrets import token_urlsafe
-from typing import Optional
 from urllib.parse import unquote_plus, urlencode
 
 from .xor_cipher import XorCipher
@@ -9,8 +8,14 @@ from .xor_cipher import XorCipher
 
 class Key:
     def __init__(self, key: str) -> None:
+        """
+        Construct a Key object
+
+        :param key: The key to use
+        :type key: str
+        """
         self._key: str = key
-        self._cipher: Optional[XorCipher] = None
+        self._cipher: XorCipher | None = None
 
     @property
     def key(self) -> str:
@@ -44,15 +49,7 @@ class Key:
         :rtype: str
         """
         raw: str = urlencode({"": self._key})[1:]
-        encrypted: str = ""
-
-        for c in raw:
-            if ord(c) < 16:
-                encrypted += "0"
-
-            encrypted += hex(ord(c))[2:]
-
-        return encrypted
+        return "".join(f"{ord(c):02x}" for c in raw)
 
     def __len__(self) -> int:
         """
@@ -75,12 +72,7 @@ class Key:
         if len(input) % 2 != 0:
             raise ValueError("Invalid key. Length of key must be even")
 
-        key: list = [None for _ in range(len(input) // 2)]
-
-        for i in range(0, len(input), 2):
-            key[i // 2] = chr(int(input[i : i + 2], 16))
-
-        return Key(unquote_plus("".join(key)))
+        return Key(unquote_plus("".join(chr(int(input[i : i + 2], 16)) for i in range(0, len(input), 2))))
 
     @staticmethod
     def generate(size: int = 128) -> Key:

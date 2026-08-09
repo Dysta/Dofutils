@@ -2,26 +2,74 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .abstract_map_cell import AbstractMapCell
 from .constant import Direction
+from .dofus_map import DofusMap
 
 
 @dataclass(frozen=True)
 class CoordinateCell:
-    _cell: AbstractMapCell
+    id: int
+    map: DofusMap
     x: int
     y: int
 
-    def __init__(self, cell: AbstractMapCell):
-        object.__setattr__(self, "_cell", cell)
+    walkable: bool = True
+    sight_blocking: bool = False
 
-        width: int = cell.map.dimensions.width
-        line: int = cell.id // (width * 2 - 1)
-        column: int = cell.id - line * (width * 2 - 1)
+    def __init__(
+        self,
+        map: DofusMap,
+        id: int,
+        walkable: bool = True,
+        sight_blocking: bool = False,
+    ):
+        """
+        Initialize a CoordinateCell instance.
+
+        :param map: The map this cell belong to
+        :param id: The id of the cell in the map
+        :param walkable: Whether the cell is walkable, defaults to True
+        :param sight_blocking: Whether the cell blocks sight, defaults to False
+        :type map: AbstractMap
+        :type id: int
+        :type walkable: bool, optional defaults to True
+        :type sight_blocking: bool, optional defaults to False
+        """
+        width: int = map.dimensions.width
+        line: int = id // (width * 2 - 1)
+        column: int = id - line * (width * 2 - 1)
         offset: int = column % width
 
         object.__setattr__(self, "y", line - offset)
-        object.__setattr__(self, "x", (cell.id - (width - 1) * self.y) // width)
+        object.__setattr__(self, "x", (id - (width - 1) * self.y) // width)
+        object.__setattr__(self, "id", id)
+        object.__setattr__(self, "walkable", walkable)
+        object.__setattr__(self, "sight_blocking", sight_blocking)
+        object.__setattr__(self, "map", map)
+
+    def eq(self, target: CoordinateCell) -> bool:
+        """
+        Check if the current coordinate cell is equal to the target
+
+        :param target: The target coordinate cell
+        :type target: CoordinateCell
+        :return: True if the cells are equal, false otherwise
+        :rtype: bool
+        """
+        return self == target
+
+    def eq_coordinate(self, x: int, y: int) -> bool:
+        """
+        Check if the current coordinate cell is equal to the given coordinate
+
+        :param x: The x coordinate
+        :type x: int
+        :param y: The y coordinate
+        :type y: int
+        :return: True if the cells are equal, false otherwise
+        :rtype: bool
+        """
+        return self.x == x and self.y == y
 
     def direction_to(self, target: CoordinateCell) -> Direction:
         """Compute the direction to the target cell
@@ -32,7 +80,7 @@ class CoordinateCell:
         :rtype: Direction
         """
         if self.x == target.x:
-            if self.y > target.y:
+            if target.y > self.y:
                 return Direction.SOUTH_WEST
             else:
                 return Direction.NORTH_EAST

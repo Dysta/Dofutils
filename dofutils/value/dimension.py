@@ -24,7 +24,7 @@ class Dimension:
         return self._height
 
     def __eq__(self, other) -> bool:
-        if other.__class__ != self.__class__:
+        if not isinstance(other, Dimension):
             return False
 
         return self.width == other.width and self.height == other.height

@@ -1,6 +1,11 @@
+from __future__ import annotations
+
+from typing import ClassVar
+
+
 class Base64:
     # fmt: off
-    _CHARSET: list = [
+    _CHARSET: ClassVar[list] = [
         "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "_",
@@ -77,14 +82,7 @@ class Base64:
         if length < 1 or length > 6:
             raise ValueError("Parameter length must be in range [1-6]")
 
-        v: int = value
-        result: str = ""
-
-        for i in range(length, 0, -1):
-            result = str(Base64._CHARSET[v & 63]) + result
-            v >>= 6
-
-        return result
+        return "".join(Base64._CHARSET[(value >> (6 * i)) & 63] for i in range(length - 1, -1, -1))
 
     @staticmethod
     def decode(encoded: str) -> int:
@@ -132,8 +130,4 @@ class Base64:
         :return: the decoded byte array. The array size will be the same as the string size
         :rtype: bytearray
         """
-        b: bytearray = bytearray()
-        for c in encoded:
-            b.append(Base64.ord(c))
-
-        return b
+        return bytearray(map(Base64.ord, encoded))

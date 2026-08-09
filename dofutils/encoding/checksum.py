@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class CheckSum:
     @staticmethod
     def integer(value: str) -> int:
@@ -8,7 +11,7 @@ class CheckSum:
         :return: the checksum of the given value
         :rtype: str
         """
-        csum: int = sum([ord(s) % 16 for s in value])
+        csum: int = sum(ord(s) % 16 for s in value)
         return csum % 16
 
     @staticmethod

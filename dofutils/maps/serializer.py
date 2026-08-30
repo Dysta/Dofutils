@@ -41,9 +41,7 @@ class CellData:
 
 class DefaultMapDataSerializer:
     cell_data_length = 10
-
-    def __init__(self):
-        self._cache: dict[str, CellData] | None = None
+    _cache: dict[str, CellData] | None = None
 
     def enable_cache(self) -> None:
         self._cache = {}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Self
 
 from dofutils.encoding import Base64, CheckSum, Key
 from dofutils.maps.constant import CellMovement
@@ -29,7 +30,7 @@ class InteractiveObjectData(CellLayerData):
     rotation: int = 0
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class CellData:
     line_of_sight: bool
     movement: CellMovement
@@ -41,17 +42,22 @@ class CellData:
 
 class DefaultMapDataSerializer:
     cell_data_length = 10
-    _cache: dict[str, CellData] | None = None
 
-    def enable_cache(self) -> None:
+    def __init__(self) -> None:
+        self._cache: dict[str, CellData] | None = None
+
+    def enable_cache(self) -> Self:
         self._cache = {}
+        return self
 
-    def disable_cache(self) -> None:
+    def disable_cache(self) -> Self:
         self._cache = None
+        return self
 
     def deserialize(self, map_data: str) -> list[CellData]:
         if len(map_data) % self.cell_data_length:
             raise ValueError("Invalid map data")
+
         return [self._deserialize_cell(map_data[i : i + 10]) for i in range(0, len(map_data), 10)]
 
     def serialize(self, cells: list[CellData]) -> str:
@@ -63,6 +69,7 @@ class DefaultMapDataSerializer:
     def _deserialize_cell(self, value: str) -> CellData:
         if self._cache is not None and value in self._cache:
             return self._cache[value]
+
         d = Base64.to_bytes(value)
         cell = CellData(
             bool(d[0] & 1),
@@ -82,8 +89,10 @@ class DefaultMapDataSerializer:
                 ((d[0] & 2) << 12) + ((d[7] & 1) << 12) + (d[8] << 6) + d[9], 0, bool(d[7] & 4), bool(d[7] & 2)
             ),
         )
+
         if self._cache is not None:
             self._cache[value] = cell
+
         return cell
 
     @staticmethod

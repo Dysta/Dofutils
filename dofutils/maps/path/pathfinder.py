@@ -3,6 +3,7 @@ from __future__ import annotations
 import heapq
 from collections.abc import Callable, Iterable
 from itertools import count
+from typing import Self
 
 from dofutils.maps.constant import Direction
 from dofutils.maps.coordinate_cell import CoordinateCell
@@ -23,27 +24,27 @@ class Pathfinder:
         self._explored_cell_limit = float("inf")
         self._add_first_cell = True
 
-    def target_distance(self, distance: int) -> Pathfinder:
+    def target_distance(self, distance: int) -> Self:
         self._target_distance = distance
         return self
 
-    def walkable_predicate(self, predicate: Callable[[CoordinateCell], bool]) -> Pathfinder:
+    def walkable_predicate(self, predicate: Callable[[CoordinateCell], bool]) -> Self:
         self._walkable_predicate = predicate
         return self
 
-    def cell_weight_function(self, function: Callable[[CoordinateCell], int]) -> Pathfinder:
+    def cell_weight_function(self, function: Callable[[CoordinateCell], int]) -> Self:
         self._cell_weight = function
         return self
 
-    def with_directions(self, directions: Iterable[Direction]) -> Pathfinder:
+    def with_directions(self, directions: Iterable[Direction]) -> Self:
         self._directions = directions
         return self
 
-    def explored_cell_limit(self, limit: int) -> Pathfinder:
+    def explored_cell_limit(self, limit: int) -> Self:
         self._explored_cell_limit = limit
         return self
 
-    def include_first_cell(self, include: bool) -> Pathfinder:
+    def include_first_cell(self, include: bool) -> Self:
         self._add_first_cell = include
         return self
 
